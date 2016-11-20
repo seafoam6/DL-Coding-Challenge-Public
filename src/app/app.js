@@ -1,17 +1,22 @@
-
+/*
+  3rd party imports
+*/
 import angular from 'angular';
 import uirouter from  'angular-ui-router';
 import localStorageService from 'angular-local-storage';
 import ngAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
-
+import moment from 'moment';
+import _ from 'lodash';
 
 // Styles + fonts
 require('../../node_modules/angular-material/angular-material.css');
 
-// utilities
-import moment from 'moment';
-import _ from 'lodash';
+/*
+  1st party imports
+*/
+// services
+import services from '../services';
 
 // app
 let app = () => {
@@ -23,11 +28,17 @@ let app = () => {
 
 const MODULE_NAME = 'dl';
 
-angular.module('dl', [localStorageService, uirouter, ngAnimate, angularMaterial
+angular.module('dl', [
+  localStorageService,
+  uirouter,
+  ngAnimate,
+  angularMaterial,
+  services
   ])
-.directive('app', app)
-.constant('moment', moment)
-.constant('_', _)
+  .constant('moment', moment)
+  .constant('_', _)
+  .directive('app', app)
+
 .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
