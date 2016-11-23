@@ -1,46 +1,36 @@
-function locationService($http,  googleLocationKey,  $log){
+function locationService($http,  weatherUndergroundKey,  $log){
 
-  //for testing complex city names
-  // coordinates for Sault St. Marie
-  var sault = {
-    latitude:46.52185799999999,
-    longitude:-84.346089600000
+
+  function getLocationUrl(coordinates){
+    return `http://api.wunderground.com/api/${weatherUndergroundKey}/geolookup/q/${coordinates.latitude},${coordinates.longitude}.json`;
   }
 
-  //private methods
-
-  function getUrl(coordinates){
-    return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.latitude},${coordinates.longitude}&key=${googleLocationKey}`
-  }
-
-
-  // public methods
-
-  this.getCity = () => {
-    getCoordinates()
-      .then((coordinates) =>{
-        $http({
+  this.getCityState = () => {
+    return this.getCoordinates()
+      .then( coordinates => {
+        return $http({
           method:'GET',
-          url:getUrl(coordinates),
+          url:getLocationUrl(coordinates),
           cache:true
-        }).then((data) => {
-          //extract City Name
-          let cityNameRaw = _.get(data, 'data.results[1].address_components[0].long_name');
-          // format city for weather underground
-          let cityNameFormatted = cityNameRaw.toLowerCase().replace(/ /g, '_');
-          //console.log(cityNameFormatted)
-          return cityNameFormatted;
         })
-
+        .then(data => {
+          // return just city and state from location object
+          return {city:data.data.location.city,
+            state:data.data.location.state};
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       })
-      .catch((err) => console.log(err))
+
+
   }
 
+  //return coordinate object
   this.getCoordinates = () => {
-    console.log('ugh')
     return new Promise(function(resolve, reject){
       navigator.geolocation.getCurrentPosition(function(position) {
-        //console.log(position)
+        console.log(position)
         resolve({
           latitude:position.coords.latitude,
           longitude:position.coords.longitude,
@@ -51,6 +41,7 @@ function locationService($http,  googleLocationKey,  $log){
       })
     })
   }
+
 
 }
 
