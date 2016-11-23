@@ -1,24 +1,24 @@
-function weatherService($http,  weatherUndergroundKey,  $log){
+function weatherService($http,  weatherUndergroundKey,  $log, locationService){
 
 
-  function getUrl(){
-    return 'http://api.wunderground.com/api/6198dbbda6a7e9a0/conditions/q/CA/San_Francisco.json';
+  function currentWeatherUrl(cityState){
+    return `http://api.wunderground.com/api/${weatherUndergroundKey}/conditions/q/${cityState.state}/${cityState.city}.json`;
   }
 
-  this.getWeather = () => {
-    return $http({
-      method:'GET',
-      url:getUrl(),
-      cache:true
-    })
-    .then(data => {
-      console.log(data);
-
-      return data;
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  this.getCurrentWeather = () => {
+    return locationService.getCityState().then((cityState) => {
+      return $http({
+        method:'GET',
+        url:currentWeatherUrl(cityState),
+        cache:true
+      })
+      .then(data => {
+        return data.data.current_observation;
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    });
   }
 
 
