@@ -22,6 +22,28 @@ function weatherService($http,  weatherUndergroundKey,  $log, locationService){
   }
 
 
+  function tenDayWeatherUrl(cityState){
+    console.log(cityState)
+    return `http://api.wunderground.com/api/${weatherUndergroundKey}/forecast10day/q/${cityState.state}/${cityState.city}.json`;
+  }
+
+  this.getTenDayWeather = () => {
+    return locationService.getCityState().then((cityState) => {
+      return $http({
+        method:'GET',
+        url:tenDayWeatherUrl(cityState),
+        cache:true
+      })
+      .then(data => {
+        return data.data;
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    });
+  }
+
+
 
 }
 
