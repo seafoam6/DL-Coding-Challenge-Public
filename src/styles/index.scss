@@ -1,1 +1,25 @@
+.header-logo{
+  margin-right:20px;
+  position:relative;
+  bottom:-4px;
 
+}
+thing{
+  height:10px;
+  width:10px;
+  background:red;
+}
+
+footer{
+  align-self: flex-end;
+  padding: 16px 32px;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+  border-top: 1px solid #ddd;
+}
+.footer-logo{
+  width:100px;
+  position:relative;
+  top:-10px;
+}

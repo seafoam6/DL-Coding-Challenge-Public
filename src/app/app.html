@@ -1,13 +1,24 @@
-<md-toolbar>
+<md-toolbar class="md-whiteframe-glow-z1">
  <div class="md-toolbar-tools">
-   <img src="logo.png">
-   <span>Weather Manatee</span>
+
+   <img class="header-logo" src="img/manatee-top.png" alt="Weather Manatee">
+   <h1>Weather Manatee</h1>
    <span flex></span>
  </div>
 </md-toolbar>
 
-<main class="main" >
-  <div class="card">
+<md-content class="main md-padding" layout="column" layout-align="center">
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Right Now</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content layout="row" layout-align="space-between">
+      <thing></thing>
+    </md-card-content>
+  </md-card>
+  <!-- <div class="card">
     76 degrees
 
     rain
@@ -15,14 +26,18 @@
 
     icon
 
-  </div>
+  </div> -->
+  <md-card>
+    <md-card-title>
+    </md-card-title>
+    <md-card-content layout="row" layout-align="space-between">
+      weather in plain text here
+    </md-card-content>
+  </md-card>
 
-  <div class="card">
-    text description of the weather
+</md-content>
 
-  </div>
-</main>
 
-<footer>
-  Brought to you by Weather Underground
+<footer layout="row" flex="noshrink" layout-align="center center" >
+  Made with data from <a href="https://www.wunderground.com/"><img class="footer-logo" alt="Weather Underground" src="img/wu-logo.png"></a>
 </footer>
