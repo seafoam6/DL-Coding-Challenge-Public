@@ -19,17 +19,24 @@ require('!style!css!sass!../styles/index.scss');
 /*
   1st party imports
 */
-// services
 import services from '../services';
-
+import cards from '../cards';
 
 // app
-let app = () => {
-  return {
-    template: require('./app.html'),
-    controller: function(weatherService){
-      weatherService.getCurrentWeather().then(d => console.log(d));
+let app = {
+  template: require('./app.html'),
+  controller: function(weatherService, $scope){
+    this.$onInit = () => {
+      this.currentForecast = {temp_f:44}
+      //weatherService.getCurrentWeather()
+      // .then(function(data){
+      //      $scope.$apply(function(){
+      //        console.log(data)
+      //        $scope.currentForcast = data;
+      //      })
+      //   })
     }
+
   }
 };
 
@@ -37,11 +44,12 @@ let app = () => {
 const MODULE_NAME = 'dl';
 
 angular.module('dl', [
-  localStorageService,
-  uirouter,
-  ngAnimate,
   angularMaterial,
-  services
+  cards,
+  localStorageService,
+  ngAnimate,
+  services,
+  uirouter
   ])
 
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -50,7 +58,7 @@ angular.module('dl', [
   .constant('_', _)
   .constant('moment', moment)
   .constant('weatherUndergroundKey', '6198dbbda6a7e9a0')
-  .directive('app', app)
+  .component('app', app)
 
 
 // gets user agent for easier debugging weird quirks
