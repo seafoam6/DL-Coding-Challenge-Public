@@ -28,3 +28,19 @@ md-card-content{
 .weather-icon{
   width:6em;
 }
+
+:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  height: 100%;
+}
+
+.rain,
+.wind{
+  padding-left:2em;
+}

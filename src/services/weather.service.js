@@ -1,4 +1,4 @@
-function weatherService($http, apiRestrictionService, localStorageService, locationService, moment, weatherUndergroundKey){
+function weatherService($http, apiRestrictionService, localStorageService, locationService, moment, weatherUndergroundKey, _){
 
 
   function currentWeatherUrl(cityState){
@@ -8,12 +8,6 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
   this.getCurrentWeather = () => {
 
     //check if enough time between API calls has happened
-    // return new Promise(function(resolve, reject){
-    //   resolve(function(){
-    //
-    //   }),
-    //   reject((err) => console.log(err))
-    // })
     if ( apiRestrictionService.hasItBeenFiveMinutes('getCurrentWeather')){
       return locationService.getCityState().then((cityState) => {
         return $http({
@@ -36,7 +30,7 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
           return currentObservation;
         })
         .catch((err) => {
-          console.log(err)
+          console.error(err)
         })
       });
     } else {
@@ -54,19 +48,25 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
   }
 
   this.getForecast = () => {
-    return locationService.getCityState().then((cityState) => {
-      return $http({
-        method:'GET',
-        url:forecastUrl(cityState),
-        cache:true
-      })
-      .then(data => {
-        return data.data;
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-    });
+    //check if enough time between API calls has happened
+    // if ( apiRestrictionService.hasItBeenFiveMinutes('getForecast')){
+      return locationService.getCityState().then((cityState) => {
+        return $http({
+          method:'GET',
+          url:forecastUrl(cityState),
+          cache:true
+        })
+        .then(data => {
+          // removes current day from array, and returns
+          return _.drop(data.data.forecast.simpleforecast.forecastday, 1);
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+      });
+    // } else {
+    //   return localStorageService.get('getForecast')
+    // }
   }
 
 

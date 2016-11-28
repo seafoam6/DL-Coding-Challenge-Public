@@ -12,6 +12,9 @@ export default function routes($stateProvider, $locationProvider, $urlRouterProv
           resolve:{
             currentForecast: function(weatherService){
               return weatherService.getCurrentWeather();
+            },
+            forecast: function(weatherService){
+              return weatherService.getForecast();
             }
           }
         }

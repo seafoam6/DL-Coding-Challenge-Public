@@ -4,17 +4,33 @@
       <span class="md-headline"> {{$ctrl.currentForecast.display_location.full}}</span>
     </md-card-title-text>
   </md-card-title>
-  <md-card-content layout="row" layout-align="space-around">
-    <img class="weather-icon" ng-src="{{$ctrl.currentForecast.icon_url}}">
-    <div class="temp">
-      <span ng-if="!isCelsius"
-      class="fahrenheit">
-        {{$ctrl.currentForecast.temp_f}}<sup ng-click="toggleCelsius()">°F</sup>
-      </span>
+  <md-card-content>
+    <div layout="row" layout-align="space-around">
+      <img class="weather-icon" ng-src="{{$ctrl.currentForecast.icon_url}}">
+      <div class="temp">
+        <span ng-if="!isCelsius"
+        class="fahrenheit">
+          {{$ctrl.currentForecast.temp_f}}
+          <sup ng-click="toggleCelsius()">°F</sup>
+        </span>
         <span ng-if="isCelsius"
         class="celsius">
-          {{$ctrl.currentForecast.temp_c}}<sup ng-click="toggleCelsius()">°C</sup>
-      </span>
+          {{$ctrl.currentForecast.temp_c}}
+          <sup ng-click="toggleCelsius()">°C</sup>
+        </span>
+      </div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-align="space-around center">
+      <div flex
+      class="rain">
+        <h3>Rain</h3>
+        <p>{{$ctrl.currentForecast.precip_today_string}}</p>
+      </div>
+      <div flex
+      class="wind">
+        <h3>Wind</h3>
+        <p>{{$ctrl.currentForecast.wind_mph}} MPH</p></div>
     </div>
   </md-card-content>
 </md-card>
