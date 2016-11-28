@@ -5,9 +5,9 @@ let overviewComponent = {
     currentForecast:'<'
   },
   template:require('./overview.template.html'),
-  require:{
-    parent: '^^app'
-  },
+  // require:{
+  //   parent: '^^app'
+  // },
   controller:controller
 }
 

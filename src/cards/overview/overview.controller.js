@@ -1,5 +1,5 @@
 let overviewController = function(weatherService, $scope, $attrs){
-  //console.log($attrs)
+  console.log($attrs)
 
   this.$onInit = () => {
 

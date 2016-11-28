@@ -21,13 +21,12 @@ require('!style!css!sass!../styles/index.scss');
 */
 import services from '../services';
 import cards from '../cards';
-import appController from './app.controller.js';
+
+
 
 // app
-let app = {
-  template: require('./app.html'),
-  controller: appController
-};
+import appComponent from './app.component.js';
+import routes from './app.routes';
 
 
 const MODULE_NAME = 'dl';
@@ -47,8 +46,8 @@ angular.module('dl', [
   .constant('_', _)
   .constant('moment', moment)
   .constant('weatherUndergroundKey', '6198dbbda6a7e9a0')
-  .component('app', app)
-
+  .component('app', appComponent)
+  .config(routes)
 
 // gets user agent for easier debugging weird quirks
 var doc = document.documentElement;

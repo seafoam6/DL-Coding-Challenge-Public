@@ -8,7 +8,12 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
   this.getCurrentWeather = () => {
 
     //check if enough time between API calls has happened
-
+    // return new Promise(function(resolve, reject){
+    //   resolve(function(){
+    //
+    //   }),
+    //   reject((err) => console.log(err))
+    // })
     if ( apiRestrictionService.hasItBeenFiveMinutes('getCurrentWeather')){
       return locationService.getCityState().then((cityState) => {
         return $http({
@@ -59,7 +64,7 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
         return data.data;
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
     });
   }

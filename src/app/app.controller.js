@@ -1,15 +1,6 @@
-let appController = function(weatherService, $scope){
-  this.currentForecast = {temp_f:44};
-  this.$onInit = () => {
+let appController = function( $scope, $state, currentForecast){
+  $scope.currentForecast = currentForecast;
 
-    weatherService.getCurrentWeather()
-    // .then(function(data){
-    //      $scope.$apply(function(){
-    //        console.log(data)
-    //        $scope.currentForcast = data;
-    //      })
-    //   })
-  }
 
 }
 
