@@ -9,7 +9,12 @@
 
 <md-content class="main md-padding" layout="column" layout-align="center" >
 
-  <overview-card layout="column" currentForecast="currentForecast"></overview-card>
+  {{$ctrl.currentForecast}}
+
+  <overview-card
+    layout="column"
+    current-Forecast="$ctrl.currentForecast">
+  </overview-card>
   <!-- <div class="card">
     76 degrees
 

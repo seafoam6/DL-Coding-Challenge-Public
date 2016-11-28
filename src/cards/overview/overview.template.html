@@ -8,7 +8,8 @@
     <img class="weather-icon" ng-src="{{currentForcast.icon_url}}">
     <div class="temp">
       <span class="fahrenheit">
-        {{currentForcast.temp_f}}
+        {{currentForecast}}
+        {{$ctrl.currentForecast}}
       </span>
     </div>
   </md-card-content>

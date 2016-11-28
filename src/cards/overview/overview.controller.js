@@ -1,7 +1,9 @@
-let overviewController = function(weatherService, $scope){
+let overviewController = function(weatherService, $scope, $attrs){
+  //console.log($attrs)
+
   this.$onInit = () => {
 
-    console.log(currentForecast)
+    //this.currentForecast = currentForecast
 
   }
 }

@@ -21,23 +21,12 @@ require('!style!css!sass!../styles/index.scss');
 */
 import services from '../services';
 import cards from '../cards';
+import appController from './app.controller.js';
 
 // app
 let app = {
   template: require('./app.html'),
-  controller: function(weatherService, $scope){
-    this.$onInit = () => {
-      this.currentForecast = {temp_f:44}
-      //weatherService.getCurrentWeather()
-      // .then(function(data){
-      //      $scope.$apply(function(){
-      //        console.log(data)
-      //        $scope.currentForcast = data;
-      //      })
-      //   })
-    }
-
-  }
+  controller: appController
 };
 
 

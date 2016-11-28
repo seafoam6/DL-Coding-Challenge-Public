@@ -1,4 +1,4 @@
-function weatherService($http,  weatherUndergroundKey,  $log, locationService){
+function weatherService($http, apiRestrictionService, localStorageService, locationService, moment, weatherUndergroundKey){
 
 
   function currentWeatherUrl(cityState){
@@ -6,19 +6,40 @@ function weatherService($http,  weatherUndergroundKey,  $log, locationService){
   }
 
   this.getCurrentWeather = () => {
-    return locationService.getCityState().then((cityState) => {
-      return $http({
-        method:'GET',
-        url:currentWeatherUrl(cityState),
-        cache:true
-      })
-      .then(data => {
-        return data.data.current_observation;
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    });
+
+    //check if enough time between API calls has happened
+
+    if ( apiRestrictionService.hasItBeenFiveMinutes('getCurrentWeather')){
+      return locationService.getCityState().then((cityState) => {
+        return $http({
+          method:'GET',
+          url:currentWeatherUrl(cityState),
+          cache:true
+        })
+        .then(data => {
+          // extract meaninful info
+          return data.data.current_observation
+        })
+        .then(currentObservation => {
+
+          //record api call time
+          apiRestrictionService.setTime('getCurrentWeather')
+
+          //save into local storage
+          localStorageService.set('currentWeather', currentObservation)
+
+          return currentObservation;
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      });
+    } else {
+      console.log('getting stored weather')
+      return localStorageService.get('currentWeather')
+    }
+
+
   }
 
 

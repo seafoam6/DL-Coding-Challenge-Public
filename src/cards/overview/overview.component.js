@@ -1,11 +1,13 @@
 import controller from './overview.controller.js';
 
 let overviewComponent = {
-  bindings: {
-    currentForecast: '<'
+  bindings:{
+    currentForecast:'<'
   },
-  transclude:true,
   template:require('./overview.template.html'),
+  require:{
+    parent: '^^app'
+  },
   controller:controller
 }
 
