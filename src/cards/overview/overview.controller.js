@@ -1,10 +1,8 @@
 let overviewController = function(weatherService, $scope, $attrs){
   console.log($attrs)
-
-  this.$onInit = () => {
-
-    //this.currentForecast = currentForecast
-
+  $scope.isCelsius = false;
+  $scope.toggleCelsius = function(){
+     $scope.isCelsius = !$scope.isCelsius;
   }
 }
 

@@ -1,15 +1,19 @@
 <md-card class="overview">
   <md-card-title>
     <md-card-title-text>
-      <span class="md-headline">Current {{currentForcast.display_location.full}}</span>
+      <span class="md-headline"> {{$ctrl.currentForecast.display_location.full}}</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-content layout="row" layout-align="space-around">
-    <img class="weather-icon" ng-src="{{currentForcast.icon_url}}">
+    <img class="weather-icon" ng-src="{{$ctrl.currentForecast.icon_url}}">
     <div class="temp">
-      <span class="fahrenheit">
-        {{currentForecast}}
-        {{$ctrl.currentForecast}}
+      <span ng-if="!isCelsius"
+      class="fahrenheit">
+        {{$ctrl.currentForecast.temp_f}}<sup ng-click="toggleCelsius()">°F</sup>
+      </span>
+        <span ng-if="isCelsius"
+        class="celsius">
+          {{$ctrl.currentForecast.temp_c}}<sup ng-click="toggleCelsius()">°C</sup>
       </span>
     </div>
   </md-card-content>

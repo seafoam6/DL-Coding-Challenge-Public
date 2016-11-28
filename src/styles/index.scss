@@ -3,6 +3,7 @@
 @import "_footer";
 @import "_header";
 
+$underline-color: #57a3e2;
 
 md-card{
   max-width:400px;
@@ -17,6 +18,12 @@ md-card-content{
   text-align: center;
   z-index: 2;
   position: relative;
+  sup{
+    font-size:.5em;
+    border:{
+      bottom:3px solid $underline-color;
+    }
+  }
 }
 .weather-icon{
   width:6em;
