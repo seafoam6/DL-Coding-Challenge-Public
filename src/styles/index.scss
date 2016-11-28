@@ -44,3 +44,27 @@ md-card-content{
 .wind{
   padding-left:2em;
 }
+
+.tenDay{
+  .md-list-item-inner{
+    padding:{
+      top:1em;
+      bottom:1em;
+    }
+  }
+}
+
+.even{
+  background:{
+    color:#eee;
+  }
+}
+
+md-list-item.md-3-line .md-list-item-text h4, md-list-item.md-3-line > .md-no-style .md-list-item-text h4 {
+    font-size: 14px;
+    letter-spacing: 0.010em;
+    line-height: 1.2em;
+    overflow: visible;
+    white-space: normal;
+    text-overflow: unset;
+}

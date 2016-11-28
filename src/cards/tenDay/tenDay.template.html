@@ -1,0 +1,30 @@
+
+<md-card class="tenDay">
+  <md-toolbar layout-"row">
+    <div class="md-toolbar-tools">
+      <span>Ten Day Forecast<span>
+    </div>
+  </md-toolbar>
+  <md-content>
+     <md-list flex>
+       <md-list-item class="md-3-line"
+        ng-repeat="item in $ctrl.tenDay"
+        ng-click="null"
+        ng-class-odd="'odd'" ng-class-even="'even'"
+        >
+         <img ng-src="{{item.icon_url}}" class="md-avatar" alt="{{item.icon}}" />
+         <div class="md-list-item-text" layout="column" flex>
+           <h3>{{item.title}}</h3>
+           <h4>{{item.fcttext}}</h4>
+           <p>Probability of precipitation: {{item.pop}}</p>
+           <p>{{item.fcttext_metric}}</p>
+           <!-- <p ng-if="!isCelsius">High: {{item.high.fahrenheit}}°F | Low: {{item.low.fahrenheit}}°F</p>
+           <p ng-if="isCelsius">High: {{item.high.celsius}}°C | Low: {{item.low.celsius}}°C</p> -->
+
+         </div>
+        <md-divider ng-if="!$last"></md-divider>
+       </md-list-item>
+
+    <md-list>
+  </md-content>
+</md-card>

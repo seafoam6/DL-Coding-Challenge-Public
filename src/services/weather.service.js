@@ -87,7 +87,7 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
       })
       .then(data => {
         console.log("ten day forecast", data.data.forecast.txt_forecast.forecastday)
-        return data.data.forecast.txt_forecast.forecastday;
+        return _.drop(data.data.forecast.txt_forecast.forecastday, 2);
       })
       .catch((err) => {
         console.log(err);
