@@ -15,6 +15,9 @@ export default function routes($stateProvider, $locationProvider, $urlRouterProv
             },
             forecast: function(weatherService){
               return weatherService.getForecast();
+            },
+            tenDay: function(weatherService){
+              return weatherService.getTenDayWeather();
             }
           }
         }

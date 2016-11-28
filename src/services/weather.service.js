@@ -8,7 +8,7 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
   this.getCurrentWeather = () => {
 
     //check if enough time between API calls has happened
-    if ( apiRestrictionService.hasItBeenFiveMinutes('getCurrentWeather')){
+    // if ( apiRestrictionService.hasItBeenFiveMinutes('getCurrentWeather')){
       return locationService.getCityState().then((cityState) => {
         return $http({
           method:'GET',
@@ -33,10 +33,10 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
           console.error(err)
         })
       });
-    } else {
-      console.log('getting stored weather')
-      return localStorageService.get('currentWeather')
-    }
+    // } else {
+    //   console.log('getting stored weather')
+    //   return localStorageService.get('currentWeather')
+    // }
 
 
   }
@@ -49,7 +49,7 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
 
   this.getForecast = () => {
     //check if enough time between API calls has happened
-    // if ( apiRestrictionService.hasItBeenFiveMinutes('getForecast')){
+    //  if ( apiRestrictionService.hasItBeenFiveMinutes('getForecast')){
       return locationService.getCityState().then((cityState) => {
         return $http({
           method:'GET',
@@ -57,6 +57,7 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
           cache:true
         })
         .then(data => {
+          console.log("get forecast", data.data.forecast.simpleforecast.forecastday)
           // removes current day from array, and returns
           return _.drop(data.data.forecast.simpleforecast.forecastday, 1);
         })
@@ -65,17 +66,19 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
         })
       });
     // } else {
-    //   return localStorageService.get('getForecast')
+    //   return localStorageService.get('getForecast');
     // }
   }
 
 
   function tenDayWeatherUrl(cityState){
-    console.log(cityState)
+    //console.log(cityState)
     return `http://api.wunderground.com/api/${weatherUndergroundKey}/forecast10day/q/${cityState.state}/${cityState.city}.json`;
   }
 
   this.getTenDayWeather = () => {
+    // if ( apiRestrictionService.hasItBeenFiveMinutes('getTenDayWeather')){
+
     return locationService.getCityState().then((cityState) => {
       return $http({
         method:'GET',
@@ -83,12 +86,17 @@ function weatherService($http, apiRestrictionService, localStorageService, locat
         cache:true
       })
       .then(data => {
-        return data.data;
+        console.log("ten day forecast", data.data.forecast.txt_forecast.forecastday)
+        return data.data.forecast.txt_forecast.forecastday;
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       })
     });
+  // } else {
+  //   return localStorageService.get('getTenDayWeather');
+  // }
+
   }
 
 }

@@ -14,10 +14,13 @@ function apiRestrictionService(localStorageService, moment){
 
     let now = moment();
 
+    console.log('inside 5minute service', apiName, localStorageService.get(apiName))
+
+
     if (!localStorageService.get(apiName)){
       // if record doesn't exist in storage,
       // record new and allow API call
-      this.setTime(apiName);
+      this.set(apiName, now);
       return true;
     } else {
       // convert stored string into date object
